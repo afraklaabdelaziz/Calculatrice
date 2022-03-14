@@ -11,46 +11,51 @@ body{
     background-color:  rgb(95, 95, 95);
     color: white;
 }
-.div1{
+.bg{
+    background-color: black;
+    color: white;
+}
+.containerDark{
     background-color: #3C3939;
     height: 95vh;
     border: solid 2px black;
     border-radius: 15px;
     box-shadow: -4px -3px 45px 21px rgba(255, 255, 255, 0.35);
 }
-.div2{
+.ecranDark{
     background-color: rgba(15, 15, 15, 0.781);
 }
-.del{
+.clearElement{
     background-color: #F2B6B6;
-}
-.btn:hover{
-    background-color: aqua !important;
 }
 .body{
     background-color: white;
 }
-.div3{
+.containerLight{
     background-color: #ECECEC;
     box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
 }
-.div4{
+.ecranLight{
     background-color: white;
     color: black !important;
     
 }
-.btns{
-    background-color: #B6B4B4;
-    color:rgb(0, 0, 0);
+.btnOperationLight{
+    background-color: #B6B4B4 !important;
+    color:rgb(0, 0, 0) !important;
 }
-.btnns{
+.btnNumberLight{
     background-color: rgb(255, 255, 255) !important;
     color:rgb(0, 0, 0) !important;
 }
-.bg{
-    background-color: black;
-    color: white;
-}
+
 button{
     border: 0;
 }
+.display{
+    display: none;
+}
+#mode{
+    background: none;
+}
+
