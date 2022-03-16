@@ -1,7 +1,7 @@
-// dark mode
+// mode night & mode light
  var mode = document.getElementById("mode");
  let body = document.body;
- let containerCalcul = document.querySelector(".containerDark");
+let containerCalcule = document.querySelector(".containerDark");
  let ecran = document.querySelector(".ecranDark");
  let btnOPeration = document.querySelectorAll(".btnOPerationDark");
  let btnNumber = document.querySelectorAll(".btnNumberDark");
@@ -9,7 +9,7 @@
  let sun = document.querySelector(".bx-sun");
     mode.onclick = function(){
     body.classList.toggle("body");
-    containerCalcul.classList.toggle("containerLight");
+        containerCalcule.classList.toggle("containerLight");
     ecran.classList.toggle("ecranLight");
     moon.classList.toggle("display");
     sun.classList.toggle("display");
@@ -20,21 +20,19 @@
         btnNumber[j].classList.toggle("btnNumberLight");
     }
 }
-
-
+// variable pour affiche operation et resultat
 const screen = document.querySelector("#screen");
 const results = document.querySelector("#result");
-
+// les variable pour stocker mes numbers and operator 
 let precedent = 0;
 let affiche = 0;
 let operator = null;
-
 
 document.addEventListener('keydown' , (event) =>{
     let value = event.keyCode;
     console.log(value);
   })
-
+// gere les button de calculatrice
     let touches = document.querySelectorAll("button");
     for (let touche of touches){
         touche.addEventListener("click",gereTouche);
@@ -47,41 +45,36 @@ function gereTouche(){
             case '+' :
                 screen.textContent = "";
                 break;
-            case '%' :
+            case '%':
                 screen.textContent = "";
                 break;
-            case '÷' :
+            case '÷':
                 screen.textContent = "";
                 break;
-            case '×' :
+            case '×':
                 screen.textContent = "";
                 break;
-            case '.' :
+            case '.':
                 screen.textContent = "";
                 break;
-            case '=' :
+            case '=':
                 screen.textContent = "";
                 break;
-            case '-' :
+            case '-':
                 screen.textContent = "-";
-                break;   
+                break;    
         }
-        affiche = touche.toString(); 
-    }else{
-        affiche += touche.toString();
     }
-
-
-    if(screen.textContent.includes('=')){
-        screen.textContent = screen.textContent.slice(0,-1);
-    }
-
-
-    if (touche == '.'){
-    if (touche == '.'){
-        if(affiche.includes('.')){
-            screen.textContent = screen.textContent.slice(0,-1);
+    if (parseFloat(touche) >= 0 || touche == '.') {
+        if (touche == '.') {
+            if (affiche.includes('.') == true) {
+                screen.textContent = screen.textContent.slice(0, -1);
+            }
         }
+        if (affiche == 0) {
+            affiche = touche.toString();
+        } else {
+            affiche += touche.toString();
     }
 }else{
     switch(touche){
@@ -93,7 +86,10 @@ function gereTouche(){
             affiche = 0;
             operator = null;
             screen.textContent = "";
-            results.textContent = "=" + 0;
+            results.textContent = '= ' + 0;
+            break;
+        case '.':
+
             break;
         case "+" :
         case "-" :
@@ -102,18 +98,21 @@ function gereTouche(){
         case "%" :
         case "^" :
             precedent = (precedent === 0) ? affiche : 
-              operate(precedent,affiche,operator);
+                operate(parseFloat(precedent), parseFloat(affiche), operator);
                     operator = touche;
-                    affiche = 0;
-                    console.log(typeof precedent); 
+            affiche = 0;
             break; 
         case "=" :
-            precedent = operate(precedent,affiche,operator);
-            results.textContent = "=" + precedent;
+            if (screen.textContent.includes('=') === true) {
+                screen.textContent = screen.textContent.slice(0, -1);
+            }
+            precedent = operate(precedent, affiche, operator);
+            results.textContent = '= ' + precedent;
             break;    
     }
 }
 }
+// function pour fair les operation mathematique
 function operate(number1,number2,operation){
     number1 = parseFloat(number1);
     number2 = parseFloat(number2);
@@ -127,12 +126,10 @@ function operate(number1,number2,operation){
         return number1*number2;
     } 
     if (operation == '÷'){
-        if (number2 != 0){
-             number1/number2;
-        }else{
-            results.textContent = "error math";
-            console.log(results.innerHTML);
+        if (number2 == 0) {
+            return results.textContent = "error math";
         }
+        return number1 / number2;
     }
     if (operation == '%'){
         return number1%number2;
